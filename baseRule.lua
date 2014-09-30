@@ -75,7 +75,7 @@ tyrannical.tags = {
         index       = 1,
         max_clients = five_layout,
         class       = {
-            "xterm" , "urxvt" , "aterm","URxvt","XTerm"
+            "xterm" , "urxvt" , "aterm","URxvt","XTerm","Gnome-terminal"
         },
     } ,
     {
@@ -89,7 +89,7 @@ tyrannical.tags = {
         class = {
             "Opera"         , "Firefox"        , "Rekonq"    , "Dillo"        , "Arora",
             "Chromium"      , "nightly"        , "Nightly"   , "minefield"    , "Minefield",
-            "luakit"
+            "luakit"	    , "Google-chrome"
         }
     } ,
     {
