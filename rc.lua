@@ -36,6 +36,8 @@ local alttab = require("radical.impl.alttab")
 local notifications = require("extern.notifications")
 local glib = require("lgi").GLib
 local wacky = require("wacky")
+
+require("runOnce")
 -- utils.profile.start()
 -- debug.sethook(utils.profile.trace, "crl", 1)
 if awesome.startup_errors then
@@ -1016,3 +1018,5 @@ utils.fd_async.network.load("http://www.gnu.org/licenses/old-licenses/gpl-2.0.ht
 end)
 
 utils.fd_async.file.copy("/tmp/foo","/tmp/bar")
+
+--run_once("gnome-session --session=awesome")
