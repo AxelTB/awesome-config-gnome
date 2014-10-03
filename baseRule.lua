@@ -123,7 +123,7 @@ tyrannical.tags = {
         icon        = utils.tools.invertedIconPath("editor.png")     ,
         layout      = awful.layout.suit.tile.bottom                  ,
         class = { 
-            "KWrite"        , "GVim"           , "Emacs"     , "Code::Blocks" , "DDD"               }
+            "KWrite"        , "GVim"           , "Emacs"     , "Code::Blocks" , "DDD", "Gedit"               }
     } ,
     {
         name = "Media",
