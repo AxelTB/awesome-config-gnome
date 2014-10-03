@@ -113,7 +113,7 @@ tyrannical.tags = {
         icon        = utils.tools.invertedIconPath("bug.png")        ,
         layout      = awful.layout.suit.max                          ,
         class ={ 
-            "Kate"          , "KDevelop"       , "Codeblocks", "Code::Blocks" , "DDD", "kate4"             }
+            "Kate"          , "KDevelop"       , "Codeblocks", "Code::Blocks" , "DDD", "kate4","Brackets"             }
     } ,
     {
         name = "Edit",
@@ -133,7 +133,7 @@ tyrannical.tags = {
         layout      = awful.layout.suit.max                          ,
         class = { 
             "Xine"          , "xine Panel"     , "xine*"     , "MPlayer"      , "GMPlayer",
-            "XMMS" }
+            "XMMS", "Rhythmbox" }
     } ,
     {
         name = "Doc",
