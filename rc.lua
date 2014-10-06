@@ -38,6 +38,7 @@ local glib = require("lgi").GLib
 local wacky = require("wacky")
 
 require("runOnce")
+print("Not found")
 -- utils.profile.start()
 -- debug.sethook(utils.profile.trace, "crl", 1)
 if awesome.startup_errors then
