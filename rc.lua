@@ -247,7 +247,7 @@ local addTag                 = customButton.addTag                      ( nil )
 local lockTag                 = {}
 
 -- Create the keyboard layout switcher, feel free to add your contry and push it to master
-local keyboardSwitcherWidget = widgets.keyboardSwitcher ( nil                                )
+--local keyboardSwitcherWidget = widgets.keyboardSwitcher ( nil                                )
 
 -- Load the desktop "conky" widget
 -- widgets.desktopMonitor(screen.count() == 1 and 1 or 2)
@@ -402,7 +402,7 @@ for s = 1, screen.count() do
     local left_layout_right_bot = wibox.layout.fixed.horizontal()
     left_layout_right_bot:add(endArrow2)
 
-    left_layout_right_bot:add(keyboardSwitcherWidget)
+    --left_layout_right_bot:add(keyboardSwitcherWidget)
     
 --     local bat = awful.widget.progressbar()
 --     vicious.register(volumewidget2, vicious.widgets.mem, '$1', 1, 'mem')
