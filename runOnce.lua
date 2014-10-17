@@ -1,3 +1,5 @@
+local awful = require("awful")
+
 function run_once(cmd)
 	findme = cmd
 	firstspace = cmd:find(" ")
