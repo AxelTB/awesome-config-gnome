@@ -97,7 +97,7 @@ beautiful.init(config.themePath                .. "/themeSciFi.lua")
 -- beautiful.init(awful.util.getdir("config").."/blind/arrow/themeSciFi.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "x-terminal-emulator"
+terminal = "urxvtc"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
