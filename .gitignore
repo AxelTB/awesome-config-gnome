@@ -4,3 +4,4 @@ serialized.lua
 .kateproject
 .kateproject.d
 .directory
+tmp/*
