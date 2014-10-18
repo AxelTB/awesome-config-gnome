@@ -1,8 +1,10 @@
 Version for Gnome
 
+Require:
+- lm-sensors
+
 
 To make gnome-session work create the file /usr/share/gnome-session/sessions/awesome.session
-
 
 [GNOME Session]
 Name=Awesome session
