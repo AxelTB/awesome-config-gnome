@@ -90,8 +90,7 @@ config.scr           = {
 config.load()
 config.themePath = awful.util.getdir("config") .. "/blind/" .. config.themeName .. "/"
 config.iconPath  = config.themePath       .. "Icon/"
-beautiful.init(config.themePath                .. "/themeSciFi.lua")
-
+beautiful.init(config.themePath                .. "themeSciFi.lua")
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 -- beautiful.init(awful.util.getdir("config").."/blind/arrow/themeSciFi.lua")
