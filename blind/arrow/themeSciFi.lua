@@ -13,6 +13,7 @@ local arrow = require("blind.arrow")
 local debug      = debug
 
 local path = debug.getinfo(1,"S").source:gsub("theme.*",""):gsub("@","")
+print("path:",path)
 
 local theme = {}
 arrow.task.theme,arrow.tag.theme = theme,theme
@@ -24,7 +25,7 @@ arrow.task.theme,arrow.tag.theme = theme,theme
 ------------------------------------------------------------------------------------------------------
 
 theme.default_height = 16
--- theme.font           = "ohsnap 8"
+--theme.font           = "ohsnap 8"
 theme.path           = path
 
 theme.bg_normal      = "#000000"
