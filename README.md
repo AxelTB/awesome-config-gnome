@@ -1,7 +1,8 @@
 Version for Gnome
 
 Require:
-- lm-sensors
+* lm-sensors
+* "en_US.UTF-8" localization (If the system default is diferent)
 
 
 To make gnome-session work create the file /usr/share/gnome-session/sessions/awesome.session
