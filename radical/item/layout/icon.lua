@@ -6,6 +6,7 @@ local wibox      = require( "wibox"        )
 local checkbox   = require( "radical.widgets.checkbox" )
 local fkey       = require( "radical.widgets.fkey"         )
 local horizontal = require( "radical.item.layout.horizontal" )
+local util       = require( "awful.util"                )
 local margins2   = require("radical.margins")
 
 local module = {}
@@ -37,7 +38,7 @@ local function create_item(item,data,args)
   --Create the main item layout
   local l,la,lr = wibox.layout.fixed.vertical(),wibox.layout.align.vertical(),wibox.layout.fixed.horizontal()
   local m = wibox.layout.margin(la)
-  local mrgns = margins2(m,data.item_style.margins)
+  local mrgns = margins2(m,util.table.join(data.item_style.margins,data.default_item_margins))
   item.get_margins = function()
     return mrgns
   end
@@ -86,7 +87,7 @@ local function create_item(item,data,args)
     return data._internal.layout.item_fit(data,item,box,w,h)
   end
   if item.checkable then
-    item.get_checked = function()
+    item.get_checked = function(data,item)
       if type(item._private_data.checked) == "function" then
         return item._private_data.checked()
       else

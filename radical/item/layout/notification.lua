@@ -8,6 +8,7 @@ local fkey      = require( "radical.widgets.fkey"      )
 local underlay  = require( "radical.widgets.underlay"  )
 local theme     = require( "radical.theme"             )
 local horizontal= require( "radical.item.layout.horizontal")
+local margins2  = require( "radical.margins"               )
 
 local module = {}
 
@@ -41,7 +42,7 @@ end
 -- Show the checkbox
 function module:setup_checked(item,data)
   if item.checkable then
-    item.get_checked = function()
+    item.get_checked = function(data,item)
       if type(item._private_data.checked) == "function" then
         return item._private_data.checked()
       else
