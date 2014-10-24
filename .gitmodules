@@ -1,0 +1,3 @@
+[submodule "bashet"]
+	path = bashet
+	url = https://gitorious.org/bashets/bashets.git
