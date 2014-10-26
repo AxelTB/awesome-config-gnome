@@ -293,19 +293,6 @@ end
 
 rad_taglist.taglist_watch_name_changes = true
 
-<<<<<<< HEAD
--- Create the addTag icon (depend on shifty rule)
-local addTag                 = customButton.addTag                      ( nil )
-
--- Create the addTag icon (depend on shifty rule)
-local lockTag                 = {}
-
--- Create the keyboard layout switcher, feel free to add your contry and push it to master
-
--- local keyboardSwitcherWidget = widgets.keyboardSwitcher ( nil                                )
-
-=======
->>>>>>> upstream/master
 -- Load the desktop "conky" widget
 -- widgets.desktopMonitor(screen.count() == 1 and 1 or 2)
 
@@ -346,13 +333,7 @@ for s = 1, screen.count() do
     wibox_top[s] = awful.wibox({ position = "top"   , ontop=false,screen = s,height=beautiful.default_height , bg = beautiful.bg_wibar or beautiful.bg_normal })
     wibox_bot[s] = awful.wibox({ position = "bottom", ontop=false,screen = s,height=beautiful.default_height , bg = beautiful.bg_wibar or beautiful.bg_normal })
 
-<<<<<<< HEAD
-    local endArrow2 = wibox.widget.imagebox()
-    endArrow2:set_image(blind.common.drawing.get_beg_arrow2({bg_color=beautiful.icon_grad,direction="left"}))
 
-
-=======
->>>>>>> upstream/master
     -- Top Wibox
     wibox_top[s]:set_widgets {
         { --Left
