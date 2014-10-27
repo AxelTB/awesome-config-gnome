@@ -4,3 +4,6 @@
 [submodule "extern/vicious"]
 	path = extern/vicious
 	url = http://git.sysphere.org/vicious
+[submodule "drawer"]
+	path = drawer
+	url = https://github.com/Elv13/drawer.git
