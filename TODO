@@ -1,0 +1,6 @@
+*Drawer
+- FIx process display on first load
+**Cpu Widget
+	- Display (Change) governor
+	- Fix Refresh button
+
