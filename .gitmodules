@@ -6,4 +6,4 @@
 	url = http://git.sysphere.org/vicious
 [submodule "drawer"]
 	path = drawer
-	url = https://github.com/Elv13/drawer.git
+	url = https://github.com/AxelTB/drawer.git
