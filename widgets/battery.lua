@@ -11,12 +11,12 @@ local capi = {timer=timer}
 
 --Save config
 local batConfig={batId=0,batTimeout=15}
-local batStatus={state,c}
+local batStatus={state,rate,fullDesign,fullReal}
 
 local battery_state = {
-  ["Full\n"]        = "↯", ["Unknown\n"]     = "?",
-  ["Charged\n"]     = "↯", ["Charging\n"]    = "⌁",
-  ["Discharging\n"] = ""
+  ["Full"]        = "↯", ["Unknown"]     = "?",
+  ["Charged"]     = "↯", ["Charging"]    = "⌁",
+  ["Discharging"] = "",  ["Empty"] = "X"
 }
 
 
@@ -44,21 +44,17 @@ local function draw(self,w,cr,width,height)
   self._tooltip.text = ((self._value or 0)*100)..'%'
   cr:set_source_rgba(1,0,0,1)
   cr:set_font_size(30)
-  local extents = cr:text_extents(battery_state[batStatus.state or "Unknown\n"] or "*")
+  local extents = cr:text_extents(battery_state[batStatus.state or "Unknown"] or '*')
   cr:move_to(ratio+(width-4*ratio)/2-extents.width/2,height/2+extents.height)
-  cr:show_text(battery_state[batStatus.state or "Unknown\n"] or "*")
+  cr:show_text(battery_state[batStatus.state or "Unknown"] or '*')
   cr:restore()
 end
 
-local function check_present(name)
-  local f = io.open('/sys/class/power_supply/'..name..'/present','r')
-  if f then f:close() end
-  return f ~= nil
-end
-
-local function timeout(wdg)
-    --Parse ACPI data
-   local pipe0 = io.popen("acpi -b | cut -d':' -f2")
+--Parses data from acpi and return the batStatus table
+local function parseAcpi()
+    local batStatus={}
+  --Parse initial data
+    local pipe0 = io.popen("acpi -V | grep 'Battery "..batConfig.batId.."..'| cut -d':' -f2")
     local buffer = pipe0:read("*all")
     pipe0:close()
     
@@ -67,13 +63,23 @@ local function timeout(wdg)
         batStatus.state="Not Present"
     else
         local data=buffer:split(",")
-        batStatus.state=data[1]:match("%d+",1)
-        batStatus.rate=data[2]
-        print("BatStatus:\n\tState: "..batStatus.state.."\n\tRate: "..batStatus.rate)
-        wdg:set_value(tonumber(batStatus.rate))
-        wdg:emit_signal("widget::updated")
-        print("Status: ", battery_state[batStatus.state or 0])
+        if #data ~= 4 then print("Acpi output parsing problem:'",buffer,"'")
+        else
+            batStatus.state=data[1]:match("%a+")
+            batStatus.rate=string.match(data[2],"%d+")
+            batStatus.fullDesign=string.match(data[3],"%d+ mAh"):match("%d+")
+            batStatus.fullReal=string.match(data[4],"%d+ mAh"):match("%d+")
+            --print("BatStatus:\n\tState: '"..batStatus.state.."'\n\tRate: "..batStatus.rate.."\n\tFullD:"..batStatus.fullDesign.."\n\tFullR:"..batStatus.fullReal)
+        end
     end
+    
+    return batStatus
+end
+
+local function timeout(wdg)
+    batStatus=parseAcpi()
+    wdg:set_value(tonumber(batStatus.rate)/100)
+    wdg:emit_signal("widget::updated")
 --    gio.File.new_for_path('/sys/class/power_supply/'..(bat_name)..'/energy_now'):load_contents_async(nil,function(file,task,c)
 --      local content = file:load_contents_finish(task)
 --      if content then
@@ -94,6 +100,7 @@ local function timeout(wdg)
 --      end
 --  end)
 end
+
 ---args={ battery_id, update_time}
 ---
 ---     battery_id: number of the visualized battery (Default 0)
@@ -106,23 +113,7 @@ local function new(args)
     end
   
     --Parse initial data
-    local pipe0 = io.popen("acpi -V | grep 'Battery "..batConfig.batId.."..'| cut -d':' -f2")
-    local buffer = pipe0:read("*all")
-    pipe0:close()
-    
-    if #buffer == 0 then
-        print("No Battery")
-        batStatus.state="Not Present"
-    else
-        local data=buffer:split(",")
-        batStatus.state=string.match(data[1],"%d+")
-        batStatus.rate=data[2]
-        batStatus.fullDesign=data[3]
-        batStatus.fullReal=data[4]
-        print("BatStatus:\n\tState: "..batStatus.state.."\n\tRate: "..batStatus.rate.."\n\tFullD:"..batStatus.fullDesign.."\n\tFullR:"..batStatus.fullReal)
-    end
-    
-    
+    batStatus=parseAcpi()
     
   local ib = wibox.widget.base.empty_widget()
 
