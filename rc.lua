@@ -115,8 +115,7 @@ editor_cmd              = terminal .. " -e " .. editor
 
 -- Default modkey.
 modkey = "Mod4"
--- Allow personal.lua file to overload some settingsS
-require('personal')
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 
 local layouts =
@@ -149,6 +148,12 @@ local layouts_all =
     awful.layout.suit.max.fullscreen  ,
     awful.layout.suit.magnifier       ,
 }
+
+-- Allow personal.lua file to overload some settings (If exists)
+local pers=loadfile('personal')
+if pers ~= nil then
+    pers()
+end
 
 -- Add Collision shortcuts
 collision()
