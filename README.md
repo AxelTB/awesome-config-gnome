@@ -29,3 +29,9 @@ DefaultProvider-notifications=notification-daemon
 
 Then create the file persona.lua and add the line
 run_once("gnome-session --session=awesome")
+
+
+
+Personal.lua
+To change pavucontrol sink visualized by the sound widget add the line
+pavucontrolDefaultSink=[Sink Number]

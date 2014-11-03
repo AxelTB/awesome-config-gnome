@@ -170,7 +170,7 @@ local clock                  = drawer.dateInfo          ( nil                   
 -- clock.bg                     = beautiful.bar_bg_alternate or beautiful.bg_alternate
 
 -- Create the volume box
-local soundWidget            = drawer.soundInfo         ( 300                                )
+local soundWidget            = drawer.soundInfo         ( pavucontrolDefaultSink             )
 
 -- Create the net manager
 local netinfo                = drawer.netInfo           ( 300                                )
