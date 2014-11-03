@@ -69,7 +69,7 @@ local function parseAcpi()
             Status.rate=string.match(data[2],"%d+")
             Status.fullDesign=string.match(data[3],"%d+ mAh"):match("%d+")
             Status.fullReal=string.match(data[4],"%d+ mAh"):match("%d+")
-            print("BatStatus:\n\tState: '"..batStatus.state.."'\n\tRate: "..batStatus.rate.."\n\tFullD:"..batStatus.fullDesign.."\n\tFullR:"..batStatus.fullReal)
+            --print("BatStatus:\n\tState: '"..batStatus.state.."'\n\tRate: "..batStatus.rate.."\n\tFullD:"..batStatus.fullDesign.."\n\tFullR:"..batStatus.fullReal)
         end
     end
 
