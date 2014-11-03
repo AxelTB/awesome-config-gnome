@@ -5,13 +5,16 @@ Debian (Jessie or latest)
 1. Download the >3.5 version from here https://packages.debian.org/search?keywords=awesome (As I write is under "rc-buggy")
 2. # dpkg -i dpkg -i awesome_[version]_[arch].deb
 3. # apt-get -f install
-4. # apt-get install awesome-extra lm-sensors
+4. # apt-get install awesome-extra lm-sensors pavucontrol
 
 
 Require:
 * sensors
 * "en_US.UTF-8" localization available (If the system default is diferent)
 * awesome > 3.5
+
+Optional
+* pavucontrol
 
 Version for Gnome
 
