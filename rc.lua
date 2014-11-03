@@ -150,7 +150,7 @@ local layouts_all =
 }
 
 -- Allow personal.lua file to overload some settings (If exists)
-local pers=loadfile('personal')
+local pers=loadfile('personal.lua')
 if pers ~= nil then
     pers()
 end
