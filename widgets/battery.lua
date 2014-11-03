@@ -16,7 +16,7 @@ local batStatus={state,rate,fullDesign,fullReal}
 local battery_state = {
     ["Full"]        = "↯", ["Unknown"]     = "?",
     ["Charged"]     = "↯", ["Charging"]    = "⌁",
-    ["Discharging"] = "",  ["Empty"] = "X"
+    ["Discharging"] = "",  ["Empty"] = "x"
 }
 
 
@@ -60,7 +60,7 @@ local function parseAcpi()
 
     if #buffer == 0 then
         print("No Battery")
-        Status.state="Not Present"
+        Status.state="Empty"
     else
         local data=buffer:split(",")
         if #data ~= 4 then print("Acpi output parsing problem:'",buffer,"'")
@@ -69,7 +69,7 @@ local function parseAcpi()
             Status.rate=string.match(data[2],"%d+")
             Status.fullDesign=string.match(data[3],"%d+ mAh"):match("%d+")
             Status.fullReal=string.match(data[4],"%d+ mAh"):match("%d+")
-            --print("BatStatus:\n\tState: '"..batStatus.state.."'\n\tRate: "..batStatus.rate.."\n\tFullD:"..batStatus.fullDesign.."\n\tFullR:"..batStatus.fullReal)
+            print("BatStatus:\n\tState: '"..batStatus.state.."'\n\tRate: "..batStatus.rate.."\n\tFullD:"..batStatus.fullDesign.."\n\tFullR:"..batStatus.fullReal)
         end
     end
 
@@ -78,7 +78,10 @@ end
 
 local function timeout(wdg)
     batStatus=parseAcpi()
-    wdg:set_value(tonumber(batStatus.rate)/100)
+    if batStatus.state == "Empty" then
+        --AXTODO: Signal no battery and reduce rate of update 
+    end
+    wdg:set_value((tonumber(batStatus.rate) or 0)/100)
     wdg:emit_signal("widget::updated")
 end
 
