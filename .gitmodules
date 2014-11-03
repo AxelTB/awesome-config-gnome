@@ -7,3 +7,6 @@
 [submodule "drawer"]
 	path = drawer
 	url = https://github.com/AxelTB/drawer.git
+[submodule "radical"]
+	path = radical
+	url = https://github.com/Elv13/radical.git
