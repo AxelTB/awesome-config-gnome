@@ -115,8 +115,7 @@ editor_cmd              = terminal .. " -e " .. editor
 
 -- Default modkey.
 modkey = "Mod4"
--- Allow personal.lua file to overload some settingsS
-require('personal')
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 
 local layouts =
@@ -150,6 +149,12 @@ local layouts_all =
     awful.layout.suit.magnifier       ,
 }
 
+-- Allow personal.lua file to overload some settings (If exists)
+local pers=loadfile('personal')
+if pers ~= nil then
+    pers()
+end
+
 -- Add Collision shortcuts
 collision()
 
@@ -165,7 +170,7 @@ local clock                  = drawer.dateInfo          ( nil                   
 -- clock.bg                     = beautiful.bar_bg_alternate or beautiful.bg_alternate
 
 -- Create the volume box
-local soundWidget            = drawer.soundInfo         ( 300                                )
+local soundWidget            = drawer.soundInfo         ( pavucontrolDefaultSink             )
 
 -- Create the net manager
 local netinfo                = drawer.netInfo           ( 300                                )
