@@ -10,3 +10,6 @@
 [submodule "radical"]
 	path = radical
 	url = https://github.com/Elv13/radical.git
+[submodule "wirefu"]
+	path = wirefu
+	url = https://github.com/AxelTB/wirefu.git
