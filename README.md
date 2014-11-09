@@ -12,6 +12,8 @@ Require:
 * sensors
 * "en_US.UTF-8" localization available (If the system default is diferent)
 * awesome > 3.5
+* cpufrequtils
+    * Add to sudoers the line ALL ALL = NOPASSWD: /usr/bin/cpufreq-set
 
 Optional
 * pavucontrol
