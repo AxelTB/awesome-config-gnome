@@ -7,6 +7,11 @@ local gio       = require( "lgi"                      ).Gio
 local wibox     = require( "wibox"                    )
 local beautiful = require( "beautiful"                )
 
+
+local lgi  = require     'lgi'
+local wirefu = require("wirefu")
+local GLib = lgi.require 'GLib'
+
 local capi = {timer=timer}
 
 --Save config
