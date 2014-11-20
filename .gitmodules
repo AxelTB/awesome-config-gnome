@@ -13,3 +13,6 @@
 [submodule "wirefu"]
 	path = wirefu
 	url = https://github.com/AxelTB/wirefu.git
+[submodule "devCheats"]
+	path = devCheats
+	url = https://github.com/AxelTB/developerCheatList.git
