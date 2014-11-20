@@ -70,8 +70,8 @@ tyrannical.tags = {
         layout      = awful.layout.suit.tile                         ,
         focus_new   = true                                           ,
         selected    = true,
---         nmaster     = 2,
---         mwfact      = 0.6,
+        --         nmaster     = 2,
+        --         mwfact      = 0.6,
         index       = 1,
         max_clients = five_layout,
         class       = {
@@ -85,11 +85,11 @@ tyrannical.tags = {
         icon        = utils.tools.invertedIconPath("net.png")        ,
         screen      = config.scr.pri                          ,
         layout      = awful.layout.suit.max                          ,
---         clone_on    = 2,
+        --         clone_on    = 2,
         class = {
             "Opera"         , "Firefox"        , "Rekonq"    , "Dillo"        , "Arora",
             "Chromium"      , "nightly"        , "Nightly"   , "minefield"    , "Minefield",
-            "luakit"	    , "Google-chrome"
+            "luakit"	    , "Google-chrome"  , "Google-chrome-stable"
         }
     } ,
     {
@@ -109,9 +109,9 @@ tyrannical.tags = {
     } ,
     {
         name = "Develop",
-     init        = true                                              ,
+        init        = true                                              ,
         exclusive   = true                                           ,
---                     screen      = {config.scr.pri, config.scr.sec}     ,
+        --                     screen      = {config.scr.pri, config.scr.sec}     ,
         icon        = utils.tools.invertedIconPath("bug.png")        ,
         layout      = awful.layout.suit.max                          ,
         class ={ 
@@ -121,7 +121,7 @@ tyrannical.tags = {
         name = "Edit",
         init        = true                                           ,
         exclusive   = false                                           ,
---                     screen      = {config.scr.pri, config.scr.sec}     ,
+        --                     screen      = {config.scr.pri, config.scr.sec}     ,
         icon        = utils.tools.invertedIconPath("editor.png")     ,
         layout      = awful.layout.suit.tile.bottom                  ,
         class = { 
@@ -139,10 +139,10 @@ tyrannical.tags = {
     } ,
     {
         name = "Doc",
-    --  init        = true                                           ,
+        --  init        = true                                           ,
         exclusive   = true                                           ,
         icon        = utils.tools.invertedIconPath("info.png")       ,
---                     screen      = config.scr.music                          ,
+        --                     screen      = config.scr.music                          ,
         layout      = awful.layout.suit.max                          ,
         force_screen= true                                           ,
         class       = {
@@ -262,7 +262,7 @@ tyrannical.tags = {
         init        = false                                          ,
         position    = 10                                             ,
         exclusive   = true                                           ,
---         screen      = config.scr.sec or config.scr.pri     ,
+        --         screen      = config.scr.sec or config.scr.pri     ,
         icon        = utils.tools.invertedIconPath("mail2.png")      ,
         layout      = awful.layout.suit.max                          ,
         class       = {"Thunderbird"   , "kmail"          , "evolution" ,}
