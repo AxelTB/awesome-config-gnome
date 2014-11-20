@@ -55,22 +55,22 @@ require("runOnce")
 -- debug.sethook(utils.profile.trace, "crl", 1)
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
-                     text = awesome.startup_errors })
+            title = "Oops, there were errors during startup!",
+            text = awesome.startup_errors })
 end
 -- Handle runtime errors after startup
 do
     local in_error = false
     awesome.connect_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then return end
-        in_error = true
+            -- Make sure we don't go into an endless error loop
+            if in_error then return end
+            in_error = true
 
-        naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = err })
-        in_error = false
-    end)
+            naughty.notify({ preset = naughty.config.presets.critical,
+                    title = "Oops, an error happened!",
+                    text = err })
+            in_error = false
+        end)
 end
 -- }}}
 vicious.cache( vicious.widgets.net )
@@ -128,7 +128,7 @@ local layouts =
     awful.layout.suit.fair            ,
     awful.layout.suit.fair.horizontal ,
     awful.layout.suit.spiral          ,
---     awful.layout.suit.spiral.dwindle,
+    --     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max             ,
     awful.layout.suit.max.fullscreen  ,
     awful.layout.suit.magnifier       ,
@@ -143,16 +143,19 @@ local layouts_all =
     awful.layout.suit.fair            ,
     awful.layout.suit.fair.horizontal ,
     awful.layout.suit.spiral          ,
---     awful.layout.suit.spiral.dwindle,
+    --     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max             ,
     awful.layout.suit.max.fullscreen  ,
     awful.layout.suit.magnifier       ,
 }
 
 -- Allow personal.lua file to overload some settings (If exists)
-local pers=loadfile('personal.lua')
+local pers=loadfile(awful.util.getdir("config")..'/personal.lua')
 if pers ~= nil then
     pers()
+    print("Info: personal.lua file loaded")
+else
+    print("Warn: personal.lua file not found")
 end
 
 -- Add Collision shortcuts
@@ -269,18 +272,18 @@ local it = bar_menu:add_item {
     sub_menu = function()
         if not app_menu then
             app_menu = customMenu.appmenu (
-            { -- Main menu
-                filter      = true,
-                show_filter = true,
-                max_items   = 20,
-                style       = radical.style.classic,
-                item_style  = radical.item.style.classic
-            }
-           ,{ -- Sub menus
-                max_items   = 20,
-                style       = radical.style.classic,
-                item_style  = radical.item.style.classic
-            })
+                { -- Main menu
+                    filter      = true,
+                    show_filter = true,
+                    max_items   = 20,
+                    style       = radical.style.classic,
+                    item_style  = radical.item.style.classic
+                }
+                ,{ -- Sub menus
+                    max_items   = 20,
+                    style       = radical.style.classic,
+                    item_style  = radical.item.style.classic
+                })
         end
         return app_menu
     end
@@ -317,7 +320,7 @@ alttab.default_icon   = config.iconPath .. "tags/other.png"
 alttab.titlebar_path  = config.themePath.. "Icon/titlebar/"
 
 -- Create a wibox for each screen and add it
-      mypromptbox = {}
+mypromptbox = {}
 local wibox_top   = {}
 local wibox_bot   = {}
 local mytaglist   = {}
@@ -365,12 +368,12 @@ for s = 1, screen.count() do
                 },
                 layout = wibox.widget.background(nil,beautiful.bar_bg_alternate or beautiful.bg_alternate)
             }, --Buttons
-            endArrow_alt2           , --Separator
+        endArrow_alt2           , --Separator
             layout = wibox.layout.fixed.horizontal
         },
         nil, --Center
         (s == config.scr.pri or s == config.scr.sec) and { -- Right, first screen only
-            endArrowR,
+        endArrowR,
             { -- The background
                 { -- The widgets
                     spacer5    ,
@@ -402,12 +405,12 @@ for s = 1, screen.count() do
             sep_end_menu   ,
             desktopPix     ,
             runbg          ,
-            endArrow       ,
+        endArrow       ,
             layout = wibox.layout.fixed.horizontal,
         },
         rad_task(s or 1)._internal.margin, --Center
         {
-            endArrow2                                ,
+        endArrow2                                ,
             { -- Right
                 {
                     spacer5                          ,
@@ -437,10 +440,10 @@ end
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
-))
+        awful.button({ }, 3, function () end),
+        awful.button({ }, 4, awful.tag.viewnext),
+        awful.button({ }, 5, awful.tag.viewprev)
+    ))
 -- }}}
 
 -- {{{ Key bindings
@@ -495,13 +498,13 @@ globalkeys = awful.util.table.join(
 
     --Custom
     awful.key({ modkey,"Control" }, "p", function()
-        utils.profile.start()
-        debug.sethook(utils.profile.trace, "crl", 1)
-    end),
+            utils.profile.start()
+            debug.sethook(utils.profile.trace, "crl", 1)
+        end),
     awful.key({ modkey,"Control","Shift" }, "p", function()
-        debug.sethook()
-        utils.profile.stop(_G)
-    end),
+            debug.sethook()
+            utils.profile.stop(_G)
+        end),
 
     --Switch screen
     --              MODIFIERS         KEY                        ACTION                               
@@ -513,41 +516,41 @@ globalkeys = awful.util.table.join(
 
     -- Prompt
     awful.key({ modkey },            "r",
-              function ()
-                  awful.prompt.run({ prompt = "Run: ", hooks = {
-                      {{         },"Return",function(command)
-                          local result = awful.util.spawn(command)
-                          mypromptbox[mouse.screen].widget:set_text(type(result) == "string" and result or "")
-                          return true
-                      end},
-                      {{"Mod1"   },"Return",function(command)
-                          local result = awful.util.spawn(command,{intrusive=true})
-                          mypromptbox[mouse.screen].widget:set_text(type(result) == "string" and result or "")
-                          return true
-                      end},
-                      {{"Shift"  },"Return",function(command)
-                          local result = awful.util.spawn(command,{intrusive=true,ontop=true,floating=true})
-                          mypromptbox[mouse.screen].widget:set_text(type(result) == "string" and result or "")
-                          return true
-                      end}
-                  }},
-                  mypromptbox[mouse.screen].widget,
-                  function (com)
-                          local result = awful.util.spawn(com)
-                          if type(result) == "string" then
-                              mypromptbox[mouse.screen].widget:set_text(result)
-                          end
-                          return true
-                  end, awful.completion.shell,
-                  awful.util.getdir("cache") .. "/history")
-              end),
+        function ()
+            awful.prompt.run({ prompt = "Run: ", hooks = {
+                        {{         },"Return",function(command)
+                                local result = awful.util.spawn(command)
+                                mypromptbox[mouse.screen].widget:set_text(type(result) == "string" and result or "")
+                                return true
+                            end},
+                        {{"Mod1"   },"Return",function(command)
+                                local result = awful.util.spawn(command,{intrusive=true})
+                                mypromptbox[mouse.screen].widget:set_text(type(result) == "string" and result or "")
+                                return true
+                            end},
+                        {{"Shift"  },"Return",function(command)
+                                local result = awful.util.spawn(command,{intrusive=true,ontop=true,floating=true})
+                                mypromptbox[mouse.screen].widget:set_text(type(result) == "string" and result or "")
+                                return true
+                            end}
+                    }},
+                mypromptbox[mouse.screen].widget,
+                function (com)
+                    local result = awful.util.spawn(com)
+                    if type(result) == "string" then
+                        mypromptbox[mouse.screen].widget:set_text(result)
+                    end
+                    return true
+                end, awful.completion.shell,
+                awful.util.getdir("cache") .. "/history")
+        end),
 
     awful.key({ modkey }, "x", function ()
-        awful.prompt.run({ prompt = "Run Lua code: " },
-        mypromptbox[mouse.screen].widget,
-        awful.util.eval, nil,
-        awful.util.getdir("cache") .. "/history_eval")
-    end)
+            awful.prompt.run({ prompt = "Run Lua code: " },
+                mypromptbox[mouse.screen].widget,
+                awful.util.eval, nil,
+                awful.util.getdir("cache") .. "/history_eval")
+        end)
 )
 
 clientkeys = awful.util.table.join(
@@ -566,35 +569,35 @@ clientkeys = awful.util.table.join(
 for i = 1, 10 do
     globalkeys = awful.util.table.join(globalkeys,
         awful.key({ modkey }, "#" .. i + 9,
-                  function ()
-                        local screen = mouse.screen
-                        local tag = awful.tag.gettags(screen)[i]
-                        if tag then
-                           awful.tag.viewonly(tag)
-                        end
-                  end),
+            function ()
+                local screen = mouse.screen
+                local tag = awful.tag.gettags(screen)[i]
+                if tag then
+                    awful.tag.viewonly(tag)
+                end
+            end),
         awful.key({ modkey, "Control" }, "#" .. i + 9,
-                  function ()
-                      local screen = mouse.screen
-                      local tag = awful.tag.gettags(screen)[i]
-                      if tag then
-                         awful.tag.viewtoggle(tag)
-                      end
-                  end),
+            function ()
+                local screen = mouse.screen
+                local tag = awful.tag.gettags(screen)[i]
+                if tag then
+                    awful.tag.viewtoggle(tag)
+                end
+            end),
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
-                  function ()
-                      local tag = awful.tag.gettags(client.focus.screen)[i]
-                      if client.focus and tag then
-                          awful.client.movetotag(tag)
-                     end
-                  end),
+            function ()
+                local tag = awful.tag.gettags(client.focus.screen)[i]
+                if client.focus and tag then
+                    awful.client.movetotag(tag)
+                end
+            end),
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
-                  function ()
-                      local tag = awful.tag.gettags(client.focus.screen)[i]
-                      if client.focus and tag then
-                          awful.client.toggletag(tag)
-                      end
-                  end))
+            function ()
+                local tag = awful.tag.gettags(client.focus.screen)[i]
+                if client.focus and tag then
+                    awful.client.toggletag(tag)
+                end
+            end))
 end
 
 clientbuttons = awful.util.table.join(
@@ -610,14 +613,14 @@ root.keys(globalkeys)
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = awful.client.focus.filter,
-                     keys = clientkeys,
-                     buttons = clientbuttons } },
+        properties = { border_width = beautiful.border_width,
+            border_color = beautiful.border_normal,
+            focus = awful.client.focus.filter,
+            keys = clientkeys,
+            buttons = clientbuttons } },
     { rule = { class = "Conky" },
-      properties = { border_width = 0,
-                     border_color = beautiful.border_normal,} },
+        properties = { border_width = 0,
+            border_color = beautiful.border_normal,} },
 }
 -- }}}
 
@@ -625,63 +628,63 @@ awful.rules.rules = {
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
-    -- Enable sloppy focus
-    c:connect_signal("mouse::enter", function(c)
-        if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-            and awful.client.focus.filter(c) then
-            client.focus = c
+        -- Enable sloppy focus
+        c:connect_signal("mouse::enter", function(c)
+                if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+                    and awful.client.focus.filter(c) then
+                    client.focus = c
+                end
+            end)
+
+        --Fix some wierd reload bugs
+        if c.size_hints.user_size and startup then
+            c:geometry({width = c.size_hints.user_size.width,height = c.size_hints.user_size.height, x = c:geometry().x})
+        end
+        if c.size_hints.max_height and c.size_hints.max_height < screen[c.screen].geometry.height/2 then
+            awful.client.setslave(c)
+        end
+        if not c.size_hints.user_position and not c.size_hints.program_position then
+            awful.placement.no_overlap(c)
+            awful.placement.no_offscreen(c)
+        end
+
+        if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
+            widgets.titlebar(c)
         end
     end)
 
-    --Fix some wierd reload bugs
-    if c.size_hints.user_size and startup then
-        c:geometry({width = c.size_hints.user_size.width,height = c.size_hints.user_size.height, x = c:geometry().x})
-    end
-    if c.size_hints.max_height and c.size_hints.max_height < screen[c.screen].geometry.height/2 then
-        awful.client.setslave(c)
-    end
-    if not c.size_hints.user_position and not c.size_hints.program_position then
-        awful.placement.no_overlap(c)
-        awful.placement.no_offscreen(c)
-    end
-
-    if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
-        widgets.titlebar(c)
-    end
-end)
-
 
 client.connect_signal("tagged",function(c)
-    if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
-        local tb = awful.titlebar(c,{size=beautiful.titlebar_height or 16})
-        if tb and tb.title_wdg then
-            local underlays = {}
-            for k,v in ipairs(c:tags()) do
-                underlays[#underlays+1] = v.name
+        if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
+            local tb = awful.titlebar(c,{size=beautiful.titlebar_height or 16})
+            if tb and tb.title_wdg then
+                local underlays = {}
+                for k,v in ipairs(c:tags()) do
+                    underlays[#underlays+1] = v.name
+                end
+                tb.title_wdg:set_underlay(underlays,{style=radical.widgets.underlay.draw_arrow,alpha=1,color="#0C2853"})
             end
-            tb.title_wdg:set_underlay(underlays,{style=radical.widgets.underlay.draw_arrow,alpha=1,color="#0C2853"})
         end
-    end
-end)
+    end)
 
 client.connect_signal("focus", function(c)
-    local tb = c:titlebar_top()
-    if tb and tb.title_wdg then
-        tb.title_wdg.data.image = beautiful.taglist_bg_image_selected
-    end
-    if not c.class == "URxvt" then
-        c.border_color = beautiful.border_focus
-    end
-end)
+        local tb = c:titlebar_top()
+        if tb and tb.title_wdg then
+            tb.title_wdg.data.image = beautiful.taglist_bg_image_selected
+        end
+        if not c.class == "URxvt" then
+            c.border_color = beautiful.border_focus
+        end
+    end)
 client.connect_signal("unfocus", function(c)
-    local tb = c:titlebar_top()
-    if tb and tb.title_wdg then
-        tb.title_wdg.data.image = beautiful.tasklist_bg_image_selected or beautiful.taglist_bg_image_used
-    end
-    if not c.class == "URxvt" then
-        c.border_color = beautiful.border_normal
-    end
-end)
+        local tb = c:titlebar_top()
+        if tb and tb.title_wdg then
+            tb.title_wdg.data.image = beautiful.tasklist_bg_image_selected or beautiful.taglist_bg_image_used
+        end
+        if not c.class == "URxvt" then
+            c.border_color = beautiful.border_normal
+        end
+    end)
 
 -- When setting a client as "slave", use the first available slot instead of the last
 awful.client._setslave = awful.client.setslave
@@ -699,39 +702,39 @@ end
 
 
 require("radical.impl.tasklist.extensions").add("Running time",function(client)
-    local w = wibox.widget.base.make_widget()
-    w.fit = function(_,w,h)
-        return radical.widgets.underlay.fit("foo",{bg="#ff0000"}),h
-    end
-    w.draw = function(self, w, cr, width, height)
-        cr:set_source_surface(radical.widgets.underlay.draw("foo",{bg=beautiful.fg_normal,height=beautiful.default_height}))
-        cr:paint()
-    end
-    return w
-end)
+        local w = wibox.widget.base.make_widget()
+        w.fit = function(_,w,h)
+            return radical.widgets.underlay.fit("foo",{bg="#ff0000"}),h
+        end
+        w.draw = function(self, w, cr, width, height)
+            cr:set_source_surface(radical.widgets.underlay.draw("foo",{bg=beautiful.fg_normal,height=beautiful.default_height}))
+            cr:paint()
+        end
+        return w
+    end)
 
 require("radical.impl.tasklist.extensions").add("Machine",function(client)
-    local w = wibox.widget.base.make_widget()
-    w.fit = function(_,w,h)
-        return radical.widgets.underlay.fit(client.machine,{bg="#ff0000"}),h
-    end
-    w.draw = function(self, w, cr, width, height)
-        cr:set_source_surface(radical.widgets.underlay.draw(client.machine,{bg=beautiful.fg_normal,height=beautiful.default_height}))
-        cr:paint()
-    end
-    return w
-end)
+        local w = wibox.widget.base.make_widget()
+        w.fit = function(_,w,h)
+            return radical.widgets.underlay.fit(client.machine,{bg="#ff0000"}),h
+        end
+        w.draw = function(self, w, cr, width, height)
+            cr:set_source_surface(radical.widgets.underlay.draw(client.machine,{bg=beautiful.fg_normal,height=beautiful.default_height}))
+            cr:paint()
+        end
+        return w
+    end)
 require("radical.impl.taglist.extensions").add("Count",function(client)
-    local w = wibox.widget.base.make_widget()
-    w.fit = function(_,w,h)
-        return radical.widgets.underlay.fit("12",{bg="#ff0000"}),h
-    end
-    w.draw = function(self, w, cr, width, height)
-        cr:set_source_surface(radical.widgets.underlay.draw("12",{bg=beautiful.fg_normal,height=beautiful.default_height}))
-        cr:paint()
-    end
-    return w
-end)
+        local w = wibox.widget.base.make_widget()
+        w.fit = function(_,w,h)
+            return radical.widgets.underlay.fit("12",{bg="#ff0000"}),h
+        end
+        w.draw = function(self, w, cr, width, height)
+            cr:set_source_surface(radical.widgets.underlay.draw("12",{bg=beautiful.fg_normal,height=beautiful.default_height}))
+            cr:paint()
+        end
+        return w
+    end)
 
 
 -- Hack to have rounded naughty popups
@@ -761,11 +764,11 @@ end
 -- The trick here is to replace the wibox metatable to hijack the constructor
 -- ... so evil!
 local fake_naughty_box = {__call=function(...)
-    local w = wibox_constructor(...)
-    w:connect_signal("property::width",resize_naughty)
-    w:connect_signal("property::height",resize_naughty)
-    return w
-end}
+        local w = wibox_constructor(...)
+        w:connect_signal("property::width",resize_naughty)
+        w:connect_signal("property::height",resize_naughty)
+        return w
+    end}
 naughty._notify = naughty.notify
 naughty.notify = function(...)
     setmetatable(wibox,fake_naughty_box)
