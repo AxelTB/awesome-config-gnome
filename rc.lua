@@ -379,7 +379,7 @@ for s = 1, screen.count() do
             { -- The background
                 { -- The widgets
                     spacer5    ,
-                    devCheats()  ,
+                    devCheats({cheatCmd = "shotwell"})  ,
                     cpuinfo    ,
                     spacer_img ,
                     meminfo    ,
