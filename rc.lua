@@ -196,6 +196,8 @@ local notif                  = notifications()
 -- Create keyboard layout manager
 local keyboard               = widgets.keyboard()
 
+-- Create devCheats
+local devCheats = require( "devCheats")
 -- Create the addTag icon (depend on shifty rule)
 local addTag                 = customButton.addTag                      ( nil )
 
@@ -377,6 +379,7 @@ for s = 1, screen.count() do
             { -- The background
                 { -- The widgets
                     spacer5    ,
+                    devCheats({cheatCmd = "shotwell"})  ,
                     cpuinfo    ,
                     spacer_img ,
                     meminfo    ,
