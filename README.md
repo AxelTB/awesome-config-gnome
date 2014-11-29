@@ -15,9 +15,6 @@ Require:
 * cpufrequtils
     * Add to sudoers the line ALL ALL = NOPASSWD: /usr/bin/cpufreq-set
 
-Optional
-* pavucontrol
-
 Version for Gnome
 
 To use gnome-session work create the file /usr/share/gnome-session/sessions/awesome.session

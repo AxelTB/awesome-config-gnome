@@ -1,0 +1,17 @@
+Categories=
+Comment=Use the command line
+OnlyShowIn=GNOME;Unity;
+Class=terminal
+TryExec=gnome-terminal
+StartupNotify=true
+Icon=utilities-terminal
+Bugzilla=GNOME
+Type=Application
+DocPath=gnome-terminal/index.html
+SingleWindow=false
+Product=gnome-terminal
+Version=3.14.1
+Keywords=shell;prompt;command;commandline;
+Exec=gnome-terminal
+Component=BugBuddyBugs
+Name=Terminal
