@@ -1,0 +1,9 @@
+Type=Application
+Terminal=false
+Name=Mozilla Firefox
+Icon=/home/lepagee/.config/awesome/blind/arrow/Icon//firefox.png
+Categories=Network;
+Class=dolphin
+Comment=Web Borwser
+MimeType=x-scheme-handler/http;x-scheme-handler/https;
+Exec=/usr/bin/firefox %U

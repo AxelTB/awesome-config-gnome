@@ -1,0 +1,15 @@
+[submodule "bashet"]
+	path = bashet
+	url = https://gitorious.org/bashets/bashets.git
+[submodule "extern/vicious"]
+	path = extern/vicious
+	url = http://git.sysphere.org/vicious
+[submodule "drawer"]
+	path = drawer
+	url = https://github.com/AxelTB/drawer.git
+[submodule "radical"]
+	path = radical
+	url = https://github.com/Elv13/radical.git
+[submodule "wirefu"]
+	path = wirefu
+	url = https://github.com/AxelTB/wirefu.git
